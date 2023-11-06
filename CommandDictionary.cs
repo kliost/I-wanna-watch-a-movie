@@ -30,8 +30,16 @@ public static class CommandDictionary
             {
                 if (int.TryParse(words[1], out int count))
                 {
-                    await BotClient.SendTextMessageAsync(message.Chat, movieSearcherService.GetPopular(count).Result, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+                    if (count < 5)
+                    {
+                        await BotClient.SendTextMessageAsync(message.Chat, movieSearcherService.GetPopular(count).Result, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
 
+                    }
+                    else
+                    {
+                        await BotClient.SendTextMessageAsync(message.Chat, movieSearcherService.GetPopular(3).Result, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+
+                    }
                 }
                 else
                 {
